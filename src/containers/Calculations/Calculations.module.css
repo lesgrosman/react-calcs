@@ -1,0 +1,11 @@
+.Calculations {
+  font-family: sans-serif;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.Calculations h1 {
+  position: relative;
+  margin: auto;
+  text-align: center;
+}

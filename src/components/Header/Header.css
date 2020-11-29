@@ -1,0 +1,23 @@
+.Header {
+  display: flex;
+  justify-content: center;
+  font-family: sans-serif;
+  text-align: center;
+  border: 1px solid;
+}
+
+.Header a {
+  color: #000 !important;
+  text-decoration: none;
+}
+
+.Header h1 {
+  padding: 3px;
+}
+#activeHome {
+  font-weight: bold;
+}
+
+#activeCalc {
+  font-weight: bold;
+}

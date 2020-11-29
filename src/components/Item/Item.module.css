@@ -1,0 +1,24 @@
+.Item {
+  border: 3px solid;
+  border-radius: 5px;
+  font-size: 50px;
+  padding: 10px;
+  margin: 25px;
+  background-color: #f5f5f5;
+}
+
+.Item input {
+  margin-left: 20px;
+  margin-bottom: 10px;
+  width: 60px;
+  height: 40px;
+  font-size: 40px;
+}
+
+.success {
+  background-color: #5cb85c;
+}
+
+.error {
+  background-color: #d9534f;
+}

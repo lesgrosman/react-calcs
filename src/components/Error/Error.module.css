@@ -1,0 +1,11 @@
+.Error {
+  color: red;
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.55s opacity, 0.55s visibility;
+}
+
+.visible {
+  opacity: 1;
+  visibility: visible;
+}

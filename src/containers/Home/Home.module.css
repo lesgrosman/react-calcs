@@ -1,0 +1,29 @@
+.Home {
+  font-family: sans-serif;
+  text-align: center;
+}
+
+.main {
+  width: 100px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.main h3 {
+  padding-left: 10px;
+}
+
+.main input {
+  width: 111px;
+  height: 27px;
+}
+
+.main button {
+  border-radius: 5px;
+  color: #fff;
+  background-color: #4267b2;
+  margin-top: 10px;
+  width: 120px;
+  height: 35px;
+}
