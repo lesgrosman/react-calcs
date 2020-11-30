@@ -3,7 +3,7 @@ import Error from "../../components/Error/Error";
 import classes from "./Home.module.css";
 import { Link } from "react-router-dom";
 import {connect} from 'react-redux'
-import {setNumberOfCalcs, clearFinishedAnswers} from '../../store/actions/actions'
+import {setNumberOfCalcs, clearFinishedAnswers, getPathName} from '../../store/actions/actions'
 
 
 function Home(props) {
@@ -22,7 +22,10 @@ function Home(props) {
     } else {
       inputControl(true);
     }
+    props.getPathName(props.location.pathname)
   }, [props.numOfCalcs]);
+  
+  
 
   return (
     <div className={classes.Home}>
@@ -55,7 +58,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
     setNumberOfCalcs,
-    clearFinishedAnswers
+    clearFinishedAnswers,
+    getPathName
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home)

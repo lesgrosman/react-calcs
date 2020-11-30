@@ -1,16 +1,18 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import {connect} from 'react-redux'
 import "./Header.css";
 
-export default function Header() {
+function Header(props) {
   let activeHome = "",
-    activeCalc = "";
+      activeCalc = "";
 
-  if (window.location.pathname === "/calculations") {
+  if (props.path === "/calculations") {
     activeCalc = "activeCalc";
-  } else if (window.location.pathname !== "/calculations") {
+  } else {
     activeHome = "activeHome";
   }
+
   return (
     <div className="Header">
       <Link to="/">
@@ -21,3 +23,11 @@ export default function Header() {
     </div>
   );
 }
+
+const mapStateToProps = (state) => {
+  return {
+    path: state.path
+  }
+}
+
+export default connect(mapStateToProps, null)(Header)

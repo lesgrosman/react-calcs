@@ -6,7 +6,8 @@ import Timer from "../../components/Timer/Timer";
 import createGroup from '../../createCalcs/createCalcs'
 import Hoc from "../../hoc/Hoc";
 import {connect} from 'react-redux'
-import {countFinishedCalcs} from '../../store/actions/actions'
+import {countFinishedCalcs, getPathName} from '../../store/actions/actions'
+
 
 
 ///////////////////////////////////////////////////
@@ -18,6 +19,7 @@ class Calculations extends Component {
 
   componentDidMount() {
     this.setCorrectAnswer();
+    this.props.getPathName(this.props.location.pathname)
   }
 
   getId(event) {
@@ -136,8 +138,8 @@ class Calculations extends Component {
   };
 
   render() {
-    console.log('numOfCalcs:', this.props.numOfCalcs)
-    console.log('finishedCalcs', this.props.finishedCalcs)
+    console.log(this.props.location.pathname)
+
     const { finishedCalcs, numOfCalcs } = this.props;
     const items = this.renderItems();
     return (
@@ -161,7 +163,8 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = {
-  countFinishedCalcs
+  countFinishedCalcs,
+  getPathName
 }
 
 

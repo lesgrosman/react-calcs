@@ -25,9 +25,17 @@ const clearFinishedAnswers = () => {
     }
 }
 
+const getPathName = (path) => {
+    return {
+        type: 'GET_PATH_NAME',
+        path
+    }
+}
+
 export {
     setNumberOfCalcs,
     countCorrectAnswers,
     countFinishedCalcs,
-    clearFinishedAnswers
+    clearFinishedAnswers,
+    getPathName
 }

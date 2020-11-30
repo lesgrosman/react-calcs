@@ -1,7 +1,8 @@
 const initialState = {
     numOfCalcs: 0,
     correctAnswers: 0,
-    finishedCalcs: 0
+    finishedCalcs: 0,
+    path: null
 }
 
 const reducer = (state=initialState, action) => {
@@ -24,7 +25,13 @@ const reducer = (state=initialState, action) => {
         case 'CLEAR_FINISHED_ANSWERS':
             return {
                 ...state,
-                finishedCalcs: 0
+                finishedCalcs: 0,
+                homeIsOpen: false
+            }
+        case 'GET_PATH_NAME':
+            return {
+                ...state,
+                path: action.path
             }
         default:
             return state
