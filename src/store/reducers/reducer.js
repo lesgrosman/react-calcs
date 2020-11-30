@@ -15,18 +15,18 @@ const reducer = (state=initialState, action) => {
         case 'COUNT_CORRECT_ANSWERS':
             return {
                 ...state,
-                correctAnswers: action.correctAnswers
+                correctAnswers: state.correctAnswers + 1
             }
         case 'COUNT_FINISHED_CALCS':
             return {
                 ...state,
                 finishedCalcs: state.finishedCalcs + 1
             }
-        case 'CLEAR_FINISHED_ANSWERS':
+        case 'CLEAR_PREV_QUIZ':
             return {
                 ...state,
                 finishedCalcs: 0,
-                homeIsOpen: false
+                correctAnswers: 0
             }
         case 'GET_PATH_NAME':
             return {

@@ -2,11 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import classes from "./FinishModal.module.css";
 import {connect} from 'react-redux'
-import {countCorrectAnswers} from '../../store/actions/actions'
 
 function FinishModal(props) {
-
-  props.countCorrectAnswers(props.quiz)
 
   const label = props.noTimeLeft ? "The time is over :(" : "Test is finished";
 
@@ -33,8 +30,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToProps = {
-  countCorrectAnswers
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(FinishModal)
+export default connect(mapStateToProps)(FinishModal)

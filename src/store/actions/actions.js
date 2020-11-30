@@ -5,12 +5,16 @@ const setNumberOfCalcs = (numOfCalcs) => {
     }
 }
 
-const countCorrectAnswers = (quiz) => {
-    const correctAnswers = quiz.filter((item) => item.status === "success").length;
-    return {
-        type: 'COUNT_CORRECT_ANSWERS',
-        correctAnswers
+const countCorrectAnswers = (status) => {
+    if (status === 'success') {
+        return {
+            type: 'COUNT_CORRECT_ANSWERS'
+        } 
     }
+    return {
+        type: ''
+    }
+ 
 }
 
 const countFinishedCalcs = () => {
@@ -21,7 +25,7 @@ const countFinishedCalcs = () => {
 
 const clearFinishedAnswers = () => {
     return {
-        type: 'CLEAR_FINISHED_ANSWERS'
+        type: 'CLEAR_PREV_QUIZ'
     }
 }
 
