@@ -3,49 +3,17 @@ import classes from "./Calculations.module.css";
 import Counter from "../../components/Counter/Counter";
 import Item from "../../components/Item/Item";
 import Timer from "../../components/Timer/Timer";
-// import FinishModal from "../../components/FinishModal/FinishModal";
+import createGroup from '../../createCalcs/createCalcs'
 import Hoc from "../../hoc/Hoc";
+import {connect} from 'react-redux'
+import {countFinishedCalcs} from '../../store/actions/actions'
 
-function createGroup(num) {
-  const arr = [];
-  for (let i = 0; i < num; i++) {
-    arr.push(i);
-  }
-  return arr.map((i) => {
-    return {
-      numA: Math.round(Math.random() * 10),
-      numB: Math.round(Math.random() * 10),
-      correctAnswer: null,
-      action: randomAction(),
-      inputValue: "",
-      touched: false,
-      status: "",
-      id: i,
-      disabled: false
-    };
-  });
-}
-
-function randomAction() {
-  const random = Math.floor(Math.random() * Math.floor(3));
-  switch (random) {
-    case 0:
-      return "+";
-    case 1:
-      return "-";
-    case 2:
-      return "x";
-    default:
-      return null;
-  }
-}
 
 ///////////////////////////////////////////////////
 
-export default class Calculations extends Component {
+class Calculations extends Component {
   state = {
-    quiz: createGroup(this.props.num),
-    done: 0
+    quiz: createGroup(this.props.numOfCalcs)
   };
 
   componentDidMount() {
@@ -77,13 +45,14 @@ export default class Calculations extends Component {
     event.preventDefault();
     const id = this.getId(event);
     const { quiz } = this.state;
-    console.log(quiz[id].inputValue);
     const condition =
       quiz[id].inputValue === quiz[id].correctAnswer
         ? "success"
         : quiz[id].inputValue === ""
         ? "error"
         : "error";
+
+    this.props.countFinishedCalcs()
 
     this.setState(({ quiz }) => {
       const old = quiz[id];
@@ -94,8 +63,7 @@ export default class Calculations extends Component {
       };
       const newQuiz = [...quiz.slice(0, id), newItem, ...quiz.slice(id + 1)];
       return {
-        quiz: newQuiz,
-        done: this.state.done + 1
+        quiz: newQuiz
       };
     });
   };
@@ -135,7 +103,7 @@ export default class Calculations extends Component {
 
   renderItems = () => {
     const arr = [];
-    for (let i = 0; i < this.props.num; i++) {
+    for (let i = 0; i < this.props.numOfCalcs; i++) {
       arr.push(i);
     }
     return arr.map((i) => {
@@ -168,18 +136,33 @@ export default class Calculations extends Component {
   };
 
   render() {
-    const { done } = this.state;
+    console.log('numOfCalcs:', this.props.numOfCalcs)
+    console.log('finishedCalcs', this.props.finishedCalcs)
+    const { finishedCalcs, numOfCalcs } = this.props;
     const items = this.renderItems();
     return (
       <div>
         <div className={classes.Calculations}>{items}</div>
-        <Counter allNums={this.props.num} done={done} quiz={this.state.quiz} />
-        <Timer done={done} quiz={this.state.quiz} numAll={this.props.num} />
-        { done === this.props.num ? (
-        <Hoc quiz={this.state.quiz} numAll={this.props.num} />
+        <Counter quiz={this.state.quiz} />
+        <Timer  quiz={this.state.quiz} />
+        {finishedCalcs === numOfCalcs ? (
+        <Hoc quiz={this.state.quiz} />
       ) : null}
       </div>
 
     );
   }
 }
+const mapStateToProps = (state) => {
+  return {
+    numOfCalcs: state.numOfCalcs,
+    finishedCalcs: state.finishedCalcs
+  }
+}
+
+const mapDispatchToProps = {
+  countFinishedCalcs
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Calculations)
